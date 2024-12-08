@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Pet</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Pet Details</h1>
+
+    <div class="pet-details">
+        <h2><%= pet.name %></h2>
+        <p><strong>Breed:</strong> <%= pet.breed %></p>
+        <p><strong>Age:</strong> <%= pet.age %> years</p>
+        <p><strong>Description:</strong> <%= pet.description %></p>
+        <p><strong>Type:</strong> <%= pet.pet_type %></p>
+        <p><strong>Address:</strong> <%= pet.address %></p>
+
+        <% if (pet.image_url) { %>
+            <img src="<%= pet.image_url %>" alt="<%= pet.name %>" style="width:200px;">
+        <% } %>
+
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>

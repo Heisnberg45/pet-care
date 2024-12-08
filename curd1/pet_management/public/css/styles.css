@@ -1,0 +1,129 @@
+/* Unique design for form labels and input fields */
+label {
+   display: block;
+   font-size: 4.4rem; /* Increased font size */
+   font-weight: bold;
+   margin-bottom: 8px;
+   color: #2c3e50; /* Deep navy for text */
+   text-transform: uppercase; /* Add a unique text style */
+   letter-spacing: 2px; /* Adds spacing for a modern look */
+   font-family: 'Poppins', sans-serif;
+}
+
+/* Inputs, Textareas, and Selects Styling */
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+   width: 100%;
+   padding: 15px;
+   margin-bottom: 25px;
+   border: 2px solid #ddd;
+   border-radius: 8px; /* Rounded corners for better design */
+   font-size: 1.2rem; /* Larger font size */
+   font-family: 'Poppins', sans-serif;
+   transition: border-color 0.3s, box-shadow 0.3s; /* Smooth focus effect */
+}
+
+/* Focus effect for inputs and textareas */
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+   border-color: #4CAF50; /* Highlight color */
+   outline: none;
+   box-shadow: 0 0 8px rgba(76, 175, 80, 0.5); /* Subtle glow effect */
+}
+
+/* File input field */
+input[type="file"] {
+   padding: 10px;
+   font-size: 1.6rem; /* Slightly larger for better readability */
+   color: #2c3e50;
+   border: 2px solid #ddd;
+   border-radius: 8px;
+   background: #f8f8f8;
+   transition: background-color 0.3s, border-color 0.3s;
+}
+
+input[type="file"]:focus {
+   border-color: #4CAF50;
+   background-color: #e8f5e9;
+}
+
+/* Submit button with unique design */
+button {
+   display: inline-block;
+   padding: 15px 30px;
+   font-size: 1.3rem;
+   font-weight: bold;
+   color: #fff;
+   background: linear-gradient(90deg, #1c147a, #3cb043); /* Gradient effect */
+   border: none;
+   border-radius: 8px;
+   cursor: pointer;
+   width: 100%;
+   text-align: center;
+   text-transform: uppercase;
+   font-family: 'Poppins', sans-serif;
+   transition: transform 0.2s, box-shadow 0.3s;
+}
+
+/* Hover effect for button */
+button:hover {
+   background: linear-gradient(90deg, #3cb043, #4CAF50);
+   transform: scale(1.05);
+   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Elevated button on hover */
+}
+
+/* Form container */
+.container {
+   max-width: 700px;
+   margin: 50px auto;
+   background: #683232;
+   border-radius: 15px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+   padding: 40px;
+   border: 3px solid #4CAF50; /* Green border for emphasis */
+}
+
+/* Add a subtle pattern to the form background */
+.container {
+   background: url('https://www.transparenttextures.com/patterns/slick-carbon.png'),
+       #065a8e; /* Combine pattern and solid color */
+   background-size: 100px 100px; /* Repeat pattern */
+}
+
+/* Title styling */
+h1 {
+   text-align: center;
+   font-size: 2.5rem;
+   color: #4CAF50;
+   margin-bottom: 30px;
+   font-weight: 700;
+   text-transform: uppercase;
+   letter-spacing: 1px;
+   font-family: 'Poppins', sans-serif;
+}
+
+/* Responsive form styling for smaller screens */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    label {
+        font-size: 3.6rem; /* Reduce label size for smaller screens */
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+        font-size: 1.1rem; /* Adjust font size for smaller screens */
+    }
+
+    button {
+        font-size: 1.1rem; /* Slightly smaller button text */
+    }
+}
