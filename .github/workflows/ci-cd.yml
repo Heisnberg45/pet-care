@@ -14,16 +14,44 @@ jobs:
     runs-on: ubuntu-latest  # Use the latest Ubuntu environment for this job
 
     steps:
+      # Step 1: Checkout the code from the repository
       - name: Checkout code
         uses: actions/checkout@v3  # Action to checkout the code from the repository
 
+      # Step 2: Set up Node.js (for a more recent version, like Node.js 18 or 20)
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Specify the Node.js version for your project
+          node-version: '18'  # Specify the Node.js version for your project (you can use 16, 18, or 20 as needed)
 
+      # Step 3: Cache node modules (improve build time by caching dependencies)
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules  # Cache the node_modules directory to speed up future builds
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}  # Cache key based on package-lock.json
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Step 4: Install dependencies
       - name: Install dependencies
         run: npm install  # Install dependencies using npm
 
+      # Step 5: Run tests (change this if you use a different test command)
       - name: Run tests
-        run: npm test  # Run tests (change this if you use a different test command)
+        run: npm test  # Run tests with npm test (or adjust for your specific test script)
+
+      # Optional: Step 6 to lint the code (optional if you want to include linting in the pipeline)
+      - name: Run ESLint (if you're using ESLint for linting)
+        run: npm run lint  # Run linting, or use your project's specific linting command
+
+      # Optional: Step 7 to build the project (e.g., for React, Vue, or Angular projects)
+      - name: Build project (if applicable)
+        run: npm run build  # Run your build script (adjust depending on your project setup)
+
+      # Optional: Step 8 to deploy to a server (e.g., AWS EC2, DigitalOcean)
+      # - name: Deploy to AWS
+      #   run: |
+      #     # Example deployment script
+      #     # You could use AWS CLI, SSH, or other methods to deploy your code to a server
+      #     echo "Deploying app to AWS..."
