@@ -1,6 +1,5 @@
 name: CI Pipeline
 
-# Trigger the workflow on push or pull request to the main branch
 on:
   push:
     branches:
@@ -14,44 +13,55 @@ jobs:
     runs-on: ubuntu-latest  # Use the latest Ubuntu environment for this job
 
     steps:
-      # Step 1: Checkout the code from the repository
+      # Step 1: Checkout code from the repository
       - name: Checkout code
-        uses: actions/checkout@v3  # Action to checkout the code from the repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub token for authentication (if private repo)
 
-      # Step 2: Set up Node.js (for a more recent version, like Node.js 18 or 20)
+      # Step 2: Debug Git configuration to help with troubleshooting
+      - name: Debug Git configuration
+        run: |
+          echo "Git version:"
+          git --version
+          echo "Git configuration:"
+          git config --list
+          echo "Current Git branch:"
+          git branch
+
+      # Step 3: Set up Node.js environment (specify version)
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # Specify the Node.js version for your project (you can use 16, 18, or 20 as needed)
+          node-version: '18'  # Specify the Node.js version
 
-      # Step 3: Cache node modules (improve build time by caching dependencies)
+      # Step 4: Cache node_modules to speed up future builds
       - name: Cache node_modules
         uses: actions/cache@v3
         with:
-          path: node_modules  # Cache the node_modules directory to speed up future builds
+          path: node_modules  # Cache the node_modules directory
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}  # Cache key based on package-lock.json
           restore-keys: |
             ${{ runner.os }}-node-
 
-      # Step 4: Install dependencies
+      # Step 5: Install dependencies
       - name: Install dependencies
         run: npm install  # Install dependencies using npm
 
-      # Step 5: Run tests (change this if you use a different test command)
+      # Step 6: Run tests
       - name: Run tests
-        run: npm test  # Run tests with npm test (or adjust for your specific test script)
+        run: npm test  # Run tests using the test script in package.json
 
-      # Optional: Step 6 to lint the code (optional if you want to include linting in the pipeline)
-      - name: Run ESLint (if you're using ESLint for linting)
-        run: npm run lint  # Run linting, or use your project's specific linting command
+      # Optional: Run linting if you have ESLint set up
+      - name: Run ESLint
+        run: npm run lint  # Run ESLint for code quality checks (if configured)
 
-      # Optional: Step 7 to build the project (e.g., for React, Vue, or Angular projects)
-      - name: Build project (if applicable)
-        run: npm run build  # Run your build script (adjust depending on your project setup)
+      # Optional: Build your project (if applicable)
+      - name: Build project
+        run: npm run build  # Run build script (adjust based on your project setup)
 
-      # Optional: Step 8 to deploy to a server (e.g., AWS EC2, DigitalOcean)
+      # Optional: Deploy to your server (e.g., AWS EC2)
       # - name: Deploy to AWS
       #   run: |
-      #     # Example deployment script
-      #     # You could use AWS CLI, SSH, or other methods to deploy your code to a server
-      #     echo "Deploying app to AWS..."
+      #     echo "Deploying to AWS EC2..."
+      #     # Add your deployment script here (AWS CLI, SSH, etc.)
